@@ -1,4 +1,3 @@
-const { log } = require("console");
 const fs = require("fs/promises");
 
 class ProductManager {
@@ -6,7 +5,7 @@ class ProductManager {
         this.path = filePath;
     };
 
-    async addProduct(title, description, price, thumbnail, code, stock) {
+    async addProduct({title, description, code, price, status, stock, category, thumbnail}) {
         try {
             const products = await this.readProducts();
             const id = products.length + 1;
@@ -17,15 +16,18 @@ class ProductManager {
                 return;
             };
 
-            if(title && description && price && thumbnail && stock) {
+            if(title && description && price && category && stock) {
                 const product = {
                     id: id,
                     title,
                     description,
-                    price,
-                    thumbnail,
                     code,
-                    stock
+                    price,
+                    code,
+                    status,
+                    stock,
+                    category,
+                    thumbnail
                 };
                 products.push(product);
                 await fs.writeFile(this.path, JSON.stringify(products, null, 2));

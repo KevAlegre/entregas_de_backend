@@ -3,9 +3,8 @@ const router = express.Router()
 
 router.post("/api/carts/", (req, res) => {
     const cart = req.body;
-    const {} = cart;
+    const {products} = cart;
     
-
 });
 
 router.get("/api/carts/:cid", (req, res) => {
