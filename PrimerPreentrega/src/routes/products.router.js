@@ -15,10 +15,7 @@ router.get("/api/products/:pid", async (req, res) => {
     if (product) {
         res.send({product});
     } else {
-        res.send(`
-        <h1>ERROR 404</h1>
-        <p>El producto con el ID ingresado no existe.</p>
-        `);
+        res.send({message: "El producto con el ID ingresado no existe"});
     };
 });
 
