@@ -51,7 +51,7 @@ class ProductManager {
         try {
             const products = await this.readProducts();
             const filteredProduct = products.find((product) => product.id === productId);
-            console.log(productId);
+            console.log(filteredProduct);
 
             if(filteredProduct) {
                 return filteredProduct;

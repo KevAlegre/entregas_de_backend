@@ -40,33 +40,28 @@ class CartManager {
     async addToCart(cartId, productId) {
         try {
             const carts = await this.readCarts();
-            const filteredCart = carts.find((cart) => cart.id === cartId);
-            const existProduct = filteredCart.products.some((product) => product.id === productId);
+            const filteredCart = carts.find((cart) => cart.id === cartId)
+            const content = await this.getCartContent(cartId);
+            const existProduct = content.some((product) => product.id === productId);
 
             if (!existProduct) {
                 const productToCart = {
                     id: productId,
                     quantity: 1
                 }
-
-                filteredCart.products.push(productToCart);
-                carts.push(filteredCart);
+                content.push(productToCart);
+                filteredCart.products = content;
                 await fs.writeFile(this.path, JSON.stringify(carts, null, 2));
+
             } else {
                 const product = filteredCart.products.find((product) => product.id === productId);
-                const quantity = product.quantity + 1;
-                const increaseQuantity = {...product, quantity: quantity};
-                
-                filteredCart.products.push(increaseQuantity);
-                carts.push(filteredCart);
+                product.quantity = product.quantity + 1;
                 await fs.writeFile(this.path, JSON.stringify(carts, null, 2));
             }
 
         } catch (error) {
             console.log("Error al agregar productos al carrito", error);
         }
-        
-
     }
 
     async readCarts() {
