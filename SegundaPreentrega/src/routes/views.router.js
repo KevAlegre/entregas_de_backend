@@ -22,10 +22,6 @@ viewsRouter.get("/chat", (req, res) => {
 });
 
 viewsRouter.get("/products", async (req, res) => {
-    /* Mostrar productos con su paginación y resolver en una de las dos maneras:
-        1. Que cada producto lleve a una nueva vista con su descripcion completa y un botón de agregar al carrito 
-        2. Que este endpoint al visualizar el producto, ademas muestre el boton de agregar carrito sin llevarlo a otra vista
-    */
    try {
         const page = req.query.page;
         const options = {
@@ -47,9 +43,8 @@ viewsRouter.get("/products", async (req, res) => {
 });
 
 viewsRouter.get("/carts/:cid", async (req, res) => {
-    //Visualizará un carrito en específico y su contenido
     const cartId = req.params.cid;
-    const cart = await cartModel.findOne({_id: cartId}).populate("products.product");
+    const cart = await cartModel.findOne({_id: cartId}).populate("products.product").lean();
 
     if (cart) {
         res.render("cart", {cart});

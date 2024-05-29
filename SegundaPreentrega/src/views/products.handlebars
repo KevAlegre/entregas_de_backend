@@ -10,7 +10,7 @@
                 <p>Precio: ${{this.price}}</p>
             </div>
             <div>
-                <button onclick="addToCart()">Agregar al carrito</button>
+                <button onclick="addToCart('{{this._id}}')">Agregar al carrito</button>
             </div>
         {{/each}}
     </section>

@@ -1,5 +1,6 @@
 import productModel from "../dao/models/products.model.js";
 import messageModel from "../dao/models/message.model.js";
+import cartModel from "../dao/models/carts.model.js";
 
 const socketManager = (socketServer) => {
     socketServer.on("connection", (socket) => {
@@ -14,6 +15,13 @@ const socketManager = (socketServer) => {
 
         socket.on("deleteProduct", async (productId) => {
             await productModel.deleteOne({_id: productId});
+        });
+
+        socket.on("addToCart", async (productId) => {
+            const cart = await cartModel.findOne({_id: "66552db663453d4d60b45b91"});
+            cart.products.push({product: productId});
+            await cart.save();
+            console.log("Producto agregado al carrito con éxito");
         });
 
         socket.on("getUsername", async (username) => {
