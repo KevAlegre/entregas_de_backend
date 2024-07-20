@@ -1,0 +1,14 @@
+<div>
+    <button>
+        <a href="{{dashboardLink}}">Ir a inicio</a>
+    </button>
+    <h2>¡Bienvenido {{user.first_name}} {{user.last_name}}!</h2>
+    <p>Rol: {{user.role}}</p>
+    <p>Email: {{user.email}}</p>
+    <p>Edad: {{user.age}}</p>
+    <div>
+        <form action="/api/sessions/logout" method="POST">
+            <button type="submit">Cerrar sesión</button>
+        </form>
+    </div>
+</div>
