@@ -1,4 +1,5 @@
 import {createCartService, getCartService, addToCartService, removeFromCartService, updateQuantityService, clearCartService} from "../services/cartsServices.js";
+import { transport } from "../services/mailingServices.js";
 
 export const createCart = async (req, res) => {
     try {
@@ -73,8 +74,24 @@ export const clearCart = async (req, res) => {
 
 export const purchaseCart = async (req, res) => {
     try {
-        
+        const mailing = await transport.sendMail({
+            from: '"TestMail" <mail-prueba@gmail.com>',
+            to: "mail@gmail.com",
+            subject: "Ticket de compra",
+            html: `
+            <div>
+                <h1>¡Muchas gracias por tu compra!</h1>
+                <h3>Detalle:</h3>
+                <h4>{Producto}</h4>
+                <p>{Precio} - <strong>x{Cantidad}</strong></p>
+                <br>
+                <p>Total de la compra: {Costo total}</p>
+            </div>
+            `,
+            attachments: []
+        });
+        res.send({status: "Success"})
     } catch (error) {
-        
+        console.log(error);
     }
 };

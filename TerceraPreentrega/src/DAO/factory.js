@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 
 export let CartsData;
 export let ProductsData;
+export let TicketsData;
 
 switch (config.persistence) {
   case "MONGO":
@@ -15,8 +16,10 @@ switch (config.persistence) {
 
     const {default: CartsDataMongo} = await import("./mongo/cartsData.js");
     const {default: ProductsDataMongo} = await import("./mongo/productsData.js");
+    const {default: TicketDataMongo} = await import("./mongo/ticketsData.js");
 
-    ProductsData = ProductsDataMongo;
     CartsData = CartsDataMongo;
+    ProductsData = ProductsDataMongo;
+    TicketsData = TicketDataMongo;
     break;
 };

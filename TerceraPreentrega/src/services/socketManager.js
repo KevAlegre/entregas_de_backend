@@ -1,5 +1,6 @@
 import { createProductService, deleteProductService } from "./productsServices.js";
 import { addToCartService } from "./cartsServices.js";
+import { createTicketService } from "./ticketsServices.js";
 
 const socketManager = (socketServer) => {
     socketServer.on("connection", (socket) => {
@@ -18,6 +19,9 @@ const socketManager = (socketServer) => {
         //User options
         socket.on("addToCart", async (cartId, productId) => {
             await addToCartService(cartId, productId);
+        });
+        socket.on("dataTicket", async (prices, email) => {
+            await createTicketService(prices, email);
         });
     });
 };

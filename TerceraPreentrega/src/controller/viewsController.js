@@ -56,9 +56,10 @@ export const renderProfile = async (req, res) => {
 export const renderCart = async (req, res) => {
     try {
         const cartId = req.user.cart;
+        const email = req.user.email;
         const cart = await getCartService(cartId);
         const dashboardLink = `http://localhost:${config.port}/products?page=1`;
-        res.render("cart", {cart: cart, dashboardLink});
+        res.render("cart", {cart: cart, dashboardLink, email});
     } catch (error) {
         console.log(error);
     };

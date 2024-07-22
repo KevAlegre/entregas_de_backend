@@ -10,6 +10,6 @@ cartsRouter.post("/:cid/products/:pid", addToCart);
 cartsRouter.delete("/:cid/products/:pid", removeFromCart);
 cartsRouter.put("/:cid/products/:pid", updateQuantity);
 cartsRouter.delete("/:cid", clearCart);
-cartsRouter.post("/:cid/purchase",isAuth ,purchaseCart);
+cartsRouter.post("/:cid/purchase" ,purchaseCart);
 
 export default cartsRouter;

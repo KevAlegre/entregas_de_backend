@@ -38,7 +38,7 @@
 <script>
     const socket = io();
     function addToCart(productId) {
-        const cartId = `{{cartId}}`
+        const cartId = `{{cartId}}`;
         socket.emit("addToCart", cartId, productId);
     };
 </script>
